@@ -31,10 +31,9 @@ namespace PRSCapstone {
                 opt.UseSqlServer(Configuration.GetConnectionString("PRSDbContext"));
             });
             services.AddCors(opt => 
-            opt.AddPolicy(DefaultCorsPolicy, x => x.WithOrigins(AllowOrigins).WithMethods(AllowMethods).AllowAnyHeader()
-            )
+                opt.AddPolicy(DefaultCorsPolicy, x => x.WithOrigins(AllowOrigins).WithMethods(AllowMethods).AllowAnyHeader()
+                )
             );
-            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
