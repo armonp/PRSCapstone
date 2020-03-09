@@ -85,13 +85,13 @@ namespace PRSCapstone.Controllers {
         private bool UserExists(int id) {
             return _context.Users.Any(e => e.Id == id);
         }
-
+        [HttpGet("login/{u}/{p}")]
         public User Login(string u, string p) {
             var success = _context.Users.Single(x => x.Username == u && x.Password == p);
             if (success == null)
-                return null ;
+                return null;
             else
                 return success;
         }
-    
+    }
 }

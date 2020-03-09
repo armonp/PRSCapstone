@@ -41,7 +41,6 @@ namespace PRSCapstone.Controllers {
             if (id != requestLines.Id) {
                 return BadRequest();
             }
-
             _context.Entry(requestLines).State = EntityState.Modified;
 
             try {
@@ -53,7 +52,8 @@ namespace PRSCapstone.Controllers {
                     throw;
                 }
             }
-
+            UpdateTotal(requestLines.RequestId);
+            
             return NoContent();
         }
 
@@ -64,7 +64,7 @@ namespace PRSCapstone.Controllers {
         public async Task<ActionResult<RequestLines>> PostRequestLines(RequestLines requestLines) {
             _context.RequestLines.Add(requestLines);
             await _context.SaveChangesAsync();
-
+            UpdateTotal(requestLines.RequestId);
             return CreatedAtAction("GetRequestLines", new { id = requestLines.Id }, requestLines);
         }
 
@@ -78,12 +78,19 @@ namespace PRSCapstone.Controllers {
 
             _context.RequestLines.Remove(requestLines);
             await _context.SaveChangesAsync();
-
+            UpdateTotal(requestLines.RequestId);
             return requestLines;
         }
 
         private bool RequestLinesExists(int id) {
             return _context.RequestLines.Any(e => e.Id == id);
+        }
+
+        private void UpdateTotal(int requestId) {
+            var request = _context.Requests.Find(requestId);
+            var total = _context.RequestLines.Where(rl => rl.RequestId == requestId).Sum(x => x.Qty * x.Product.Price);
+            request.Total = total;
+            _context.SaveChanges();
         }
     }
 }

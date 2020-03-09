@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PRSCapstone.Models;
 
 namespace PRSCapstone.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200309151912_changed request price to 'total'")]
+    partial class changedrequestpricetototal
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -254,7 +256,7 @@ namespace PRSCapstone.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PRSCapstone.Models.Request", null)
+                    b.HasOne("PRSCapstone.Models.Request", "Request")
                         .WithMany("RequestLines")
                         .HasForeignKey("RequestId")
                         .OnDelete(DeleteBehavior.Cascade)
