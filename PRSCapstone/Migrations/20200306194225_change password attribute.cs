@@ -1,11 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace PRSCapstone.Migrations
-{
-    public partial class changepasswordattribute : Migration
-    {
-        protected override void Up(MigrationBuilder migrationBuilder)
-        {
+namespace PRSCapstone.Migrations {
+    public partial class changepasswordattribute : Migration {
+        protected override void Up(MigrationBuilder migrationBuilder) {
             migrationBuilder.AddColumn<string>(
                 name: "Password",
                 table: "Users",
@@ -14,8 +11,7 @@ namespace PRSCapstone.Migrations
                 defaultValue: "");
         }
 
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
+        protected override void Down(MigrationBuilder migrationBuilder) {
             migrationBuilder.DropColumn(
                 name: "Password",
                 table: "Users");

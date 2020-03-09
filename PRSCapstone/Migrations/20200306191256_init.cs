@@ -1,15 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace PRSCapstone.Migrations
-{
-    public partial class init : Migration
-    {
-        protected override void Up(MigrationBuilder migrationBuilder)
-        {
+namespace PRSCapstone.Migrations {
+    public partial class init : Migration {
+        protected override void Up(MigrationBuilder migrationBuilder) {
             migrationBuilder.CreateTable(
                 name: "Users",
-                columns: table => new
-                {
+                columns: table => new {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Firstname = table.Column<string>(maxLength: 30, nullable: false),
@@ -20,15 +16,13 @@ namespace PRSCapstone.Migrations
                     IsReviewer = table.Column<bool>(nullable: false),
                     IsAdmin = table.Column<bool>(nullable: false)
                 },
-                constraints: table =>
-                {
+                constraints: table => {
                     table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Vendors",
-                columns: table => new
-                {
+                columns: table => new {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Code = table.Column<string>(maxLength: 30, nullable: true),
@@ -40,15 +34,13 @@ namespace PRSCapstone.Migrations
                     Phone = table.Column<string>(maxLength: 12, nullable: true),
                     Email = table.Column<string>(maxLength: 255, nullable: true)
                 },
-                constraints: table =>
-                {
+                constraints: table => {
                     table.PrimaryKey("PK_Vendors", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Products",
-                columns: table => new
-                {
+                columns: table => new {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PartNbr = table.Column<string>(maxLength: 30, nullable: false),
@@ -58,8 +50,7 @@ namespace PRSCapstone.Migrations
                     PhotoPath = table.Column<string>(maxLength: 255, nullable: true),
                     VendorId = table.Column<int>(nullable: false)
                 },
-                constraints: table =>
-                {
+                constraints: table => {
                     table.PrimaryKey("PK_Products", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Products_Vendors_VendorId",
@@ -94,8 +85,7 @@ namespace PRSCapstone.Migrations
                 filter: "[Code] IS NOT NULL");
         }
 
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
+        protected override void Down(MigrationBuilder migrationBuilder) {
             migrationBuilder.DropTable(
                 name: "Products");
 

@@ -1,15 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace PRSCapstone.Migrations
-{
-    public partial class addedrequestandrequestlinetables : Migration
-    {
-        protected override void Up(MigrationBuilder migrationBuilder)
-        {
+namespace PRSCapstone.Migrations {
+    public partial class addedrequestandrequestlinetables : Migration {
+        protected override void Up(MigrationBuilder migrationBuilder) {
             migrationBuilder.CreateTable(
                 name: "Requests",
-                columns: table => new
-                {
+                columns: table => new {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Description = table.Column<string>(maxLength: 80, nullable: false),
@@ -20,8 +16,7 @@ namespace PRSCapstone.Migrations
                     Price = table.Column<decimal>(type: "decimal(11,2)", nullable: false),
                     UserId = table.Column<int>(nullable: false)
                 },
-                constraints: table =>
-                {
+                constraints: table => {
                     table.PrimaryKey("PK_Requests", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Requests_Users_UserId",
@@ -33,16 +28,14 @@ namespace PRSCapstone.Migrations
 
             migrationBuilder.CreateTable(
                 name: "RequestLines",
-                columns: table => new
-                {
+                columns: table => new {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     RequestId = table.Column<int>(nullable: false),
                     ProductId = table.Column<int>(nullable: false),
                     Qty = table.Column<int>(nullable: false)
                 },
-                constraints: table =>
-                {
+                constraints: table => {
                     table.PrimaryKey("PK_RequestLines", x => x.Id);
                     table.ForeignKey(
                         name: "FK_RequestLines_Products_ProductId",
@@ -74,8 +67,7 @@ namespace PRSCapstone.Migrations
                 column: "UserId");
         }
 
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
+        protected override void Down(MigrationBuilder migrationBuilder) {
             migrationBuilder.DropTable(
                 name: "RequestLines");
 

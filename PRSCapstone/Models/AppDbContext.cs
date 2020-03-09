@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace PRSCapstone.Models {
     public class AppDbContext : DbContext {
@@ -13,7 +9,7 @@ namespace PRSCapstone.Models {
         public DbSet<Product> Products { get; set; }
         public DbSet<Vendor> Vendors { get; set; }
         public DbSet<Request> Requests { get; set; }
-        public DbSet<RequestLines> RequestLines {get; set;}
+        public DbSet<RequestLines> RequestLines { get; set; }
 
         protected override void OnModelCreating(ModelBuilder model) {
             model.Entity<User>(u => {

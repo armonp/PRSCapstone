@@ -1,40 +1,32 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using PRSCapstone.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using PRSCapstone.Models;
 
-namespace PRSCapstone.Controllers
-{
+namespace PRSCapstone.Controllers {
     [Route("api/[controller]")]
     [ApiController]
-    public class VendorsController : ControllerBase
-    {
+    public class VendorsController : ControllerBase {
         private readonly AppDbContext _context;
 
-        public VendorsController(AppDbContext context)
-        {
+        public VendorsController(AppDbContext context) {
             _context = context;
         }
 
         // GET: api/Vendors
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Vendor>>> GetVendors()
-        {
+        public async Task<ActionResult<IEnumerable<Vendor>>> GetVendors() {
             return await _context.Vendors.ToListAsync();
         }
 
         // GET: api/Vendors/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Vendor>> GetVendor(int id)
-        {
+        public async Task<ActionResult<Vendor>> GetVendor(int id) {
             var vendor = await _context.Vendors.FindAsync(id);
 
-            if (vendor == null)
-            {
+            if (vendor == null) {
                 return NotFound();
             }
 
@@ -45,27 +37,19 @@ namespace PRSCapstone.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutVendor(int id, Vendor vendor)
-        {
-            if (id != vendor.Id)
-            {
+        public async Task<IActionResult> PutVendor(int id, Vendor vendor) {
+            if (id != vendor.Id) {
                 return BadRequest();
             }
 
             _context.Entry(vendor).State = EntityState.Modified;
 
-            try
-            {
+            try {
                 await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!VendorExists(id))
-                {
+            } catch (DbUpdateConcurrencyException) {
+                if (!VendorExists(id)) {
                     return NotFound();
-                }
-                else
-                {
+                } else {
                     throw;
                 }
             }
@@ -77,8 +61,7 @@ namespace PRSCapstone.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
-        public async Task<ActionResult<Vendor>> PostVendor(Vendor vendor)
-        {
+        public async Task<ActionResult<Vendor>> PostVendor(Vendor vendor) {
             _context.Vendors.Add(vendor);
             await _context.SaveChangesAsync();
 
@@ -87,11 +70,9 @@ namespace PRSCapstone.Controllers
 
         // DELETE: api/Vendors/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Vendor>> DeleteVendor(int id)
-        {
+        public async Task<ActionResult<Vendor>> DeleteVendor(int id) {
             var vendor = await _context.Vendors.FindAsync(id);
-            if (vendor == null)
-            {
+            if (vendor == null) {
                 return NotFound();
             }
 
@@ -101,8 +82,7 @@ namespace PRSCapstone.Controllers
             return vendor;
         }
 
-        private bool VendorExists(int id)
-        {
+        private bool VendorExists(int id) {
             return _context.Vendors.Any(e => e.Id == id);
         }
     }
