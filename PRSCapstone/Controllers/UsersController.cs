@@ -38,6 +38,7 @@ namespace PRSCapstone.Controllers {
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUser(int id, User user) {
+            //_context.CheckAdmin(_context._loggedinuser);
             if (id != user.Id) {
                 return BadRequest();
             }
@@ -62,6 +63,7 @@ namespace PRSCapstone.Controllers {
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user) {
+            //_context.CheckAdmin(_context._loggedinuser);
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
@@ -71,6 +73,7 @@ namespace PRSCapstone.Controllers {
         // DELETE: api/Users/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<User>> DeleteUser(int id) {
+            //_context.CheckAdmin(_context._loggedinuser);
             var user = await _context.Users.FindAsync(id);
             if (user == null) {
                 return NotFound();
@@ -87,11 +90,11 @@ namespace PRSCapstone.Controllers {
         }
         [HttpGet("login/{u}/{p}")]
         public User Login(string u, string p) {
-            var success = _context.Users.Single(x => x.Username == u && x.Password == p);
-            if (success == null)
+            var loggedinuser = _context.Users.Single(x => x.Username == u && x.Password == p);
+            if (loggedinuser == null)
                 return null;
             else
-                return success;
+                return loggedinuser;
         }
     }
 }

@@ -38,6 +38,7 @@ namespace PRSCapstone.Controllers {
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProduct(int id, Product product) {
+            //_context.CheckAdmin(_context._loggedinuser);
             if (id != product.Id) {
                 return BadRequest();
             }
@@ -62,6 +63,7 @@ namespace PRSCapstone.Controllers {
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
         public async Task<ActionResult<Product>> PostProduct(Product product) {
+            //_context.CheckAdmin(_context._loggedinuser);
             _context.Products.Add(product);
             await _context.SaveChangesAsync();
 
@@ -71,6 +73,7 @@ namespace PRSCapstone.Controllers {
         // DELETE: api/Products/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Product>> DeleteProduct(int id) {
+            //_context.CheckAdmin(_context._loggedinuser);
             var product = await _context.Products.FindAsync(id);
             if (product == null) {
                 return NotFound();

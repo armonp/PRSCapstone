@@ -38,6 +38,7 @@ namespace PRSCapstone.Controllers {
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
         public async Task<IActionResult> PutVendor(int id, Vendor vendor) {
+            //_context.CheckAdmin(_context._loggedinuser);
             if (id != vendor.Id) {
                 return BadRequest();
             }
@@ -62,6 +63,7 @@ namespace PRSCapstone.Controllers {
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
         public async Task<ActionResult<Vendor>> PostVendor(Vendor vendor) {
+            //_context.CheckAdmin(_context._loggedinuser);
             _context.Vendors.Add(vendor);
             await _context.SaveChangesAsync();
 
@@ -71,6 +73,7 @@ namespace PRSCapstone.Controllers {
         // DELETE: api/Vendors/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Vendor>> DeleteVendor(int id) {
+            //_context.CheckAdmin(_context._loggedinuser);
             var vendor = await _context.Vendors.FindAsync(id);
             if (vendor == null) {
                 return NotFound();

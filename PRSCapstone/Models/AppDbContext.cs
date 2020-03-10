@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace PRSCapstone.Models {
     public class AppDbContext : DbContext {
@@ -22,6 +23,11 @@ namespace PRSCapstone.Models {
                 p.HasIndex(x => x.PartNbr).IsUnique();
             });
         }
+        //public User _loggedinuser = new User { Id = 3, Firstname = "Testing", Lastname = "User", Username = "user2", Password = "user2", Phone = null, Email = null, IsReviewer = true, IsAdmin = true };
+
+        //public void CheckAdmin(User loggedinuser) {
+        //    if (!loggedinuser.IsAdmin) throw new Exception("User does not have permission to access this function");
+        //}
     }
 
 }
