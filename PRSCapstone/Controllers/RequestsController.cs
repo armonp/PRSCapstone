@@ -93,7 +93,7 @@ namespace PRSCapstone.Controllers {
         private bool RequestExists(int id) {
             return _context.Requests.Any(e => e.Id == id);
         }
-        [HttpPut("markreviewed/{id}/{request}")]
+        [HttpPut("review/{id}/{request}")]
         public Task<IActionResult> MarkReviewed(int id, Request request) {
             request.RejectionReason = null;
             if (request.Total < 50 ) 
@@ -103,7 +103,7 @@ namespace PRSCapstone.Controllers {
             return PutRequest(id, request);
         
         }
-        [HttpPut("markrejected/{id}/{request}")]
+        [HttpPut("reject/{id}/{request}")]
         public Task<IActionResult> MarkRejected(int id, Request request) {
             request.Status = StatusRejected;
             if (request.RejectionReason == null) {
@@ -111,13 +111,13 @@ namespace PRSCapstone.Controllers {
             }
             return PutRequest(id, request);
         }
-        [HttpPut("markapproved/{request}")]
+        [HttpPut("approve/{request}")]
         public Task<IActionResult> MarkApproved (Request request) {
             request.Status = StatusApproved;
             request.RejectionReason = null;
             return PutRequest(request.Id, request);
         }
-        [HttpGet("getrequesttobereviewed/{userId}")]
+        [HttpGet("reviews/{userId}")]
         public IEnumerable<Request> GetRequestsToBeReviewed (int userId) {
             var loggedinuser = _context.Users.Find(userId);
             if (loggedinuser.IsReviewer)
