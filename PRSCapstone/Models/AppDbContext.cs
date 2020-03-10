@@ -23,6 +23,7 @@ namespace PRSCapstone.Models {
                 p.HasIndex(x => x.PartNbr).IsUnique();
             });
         }
+        //Check if a user is and Admin and has access to maintenance functions
         //public User _loggedinuser = new User { Id = 3, Firstname = "Testing", Lastname = "User", Username = "user2", Password = "user2", Phone = null, Email = null, IsReviewer = true, IsAdmin = true };
 
         //public void CheckAdmin(User loggedinuser) {

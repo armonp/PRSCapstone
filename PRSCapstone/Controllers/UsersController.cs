@@ -96,11 +96,11 @@ namespace PRSCapstone.Controllers {
             else
                 return loggedinuser;
         }
+        [HttpGet("recoverpassword/{username}")]
         public string ForgotPassword(string username) {
             //given an Username, a password is returned. Ideally, sent to email address associated with username
             var user = _context.Users.Single(x => x.Username == username);
                 return user.Password;
-
 
         }
     }
