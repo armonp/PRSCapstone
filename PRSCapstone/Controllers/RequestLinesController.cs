@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PRSCapstone.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -91,6 +92,17 @@ namespace PRSCapstone.Controllers {
             var total = _context.RequestLines.Where(rl => rl.RequestId == requestId).Sum(x => x.Qty * x.Product.Price);
             request.Total = total;
             _context.SaveChanges();
+        }
+        public void CreatePO(int vendorId) {
+            var vendorPO =
+                from vendor in _context.Vendors
+                join prod in _context.Products on vendor.Id equals prod.VendorId
+                join requestline in _context.RequestLines on prod.Id equals requestline.ProductId
+                where vendor.Id == vendorId
+                select _context.Requests;
+
+            Console.WriteLine(vendorPO);
+                
         }
     }
 }
