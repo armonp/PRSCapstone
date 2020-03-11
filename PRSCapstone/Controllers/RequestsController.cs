@@ -94,28 +94,28 @@ namespace PRSCapstone.Controllers {
             return _context.Requests.Any(e => e.Id == id);
         }
         [HttpPut("review/{id}/{request}")]
-        public Task<IActionResult> MarkReviewed(int id, Request request) {
+        public async Task<IActionResult> MarkReviewed(int id, Request request) {
             request.RejectionReason = null;
             if (request.Total < 50 ) 
                 request.Status = StatusApproved;
             else
                 request.Status = StatusReview;
-            return PutRequest(id, request);
+            return await PutRequest(id, request);
         
         }
         [HttpPut("reject/{id}/{request}")]
-        public Task<IActionResult> MarkRejected(int id, Request request) {
+        public async Task<IActionResult> MarkRejected(int id, Request request) {
             request.Status = StatusRejected;
             if (request.RejectionReason == null) {
                 throw new Exception("Rejection reason must be included with Rejected requests");
             }
-            return PutRequest(id, request);
+            return await PutRequest(id, request);
         }
         [HttpPut("approve/{request}")]
-        public Task<IActionResult> MarkApproved (Request request) {
+        public async Task<IActionResult> MarkApproved (Request request) {
             request.Status = StatusApproved;
             request.RejectionReason = null;
-            return PutRequest(request.Id, request);
+            return await PutRequest(request.Id, request);
         }
         [HttpGet("reviews/{userId}")]
         public IEnumerable<Request> GetRequestsToBeReviewed (int userId) {
